@@ -1,5 +1,6 @@
 from ctypes import *
 import argparse
+from errors import * 
 
 lib = cdll.LoadLibrary("./vendor/liboasyamlcombine.so")
 
@@ -15,6 +16,17 @@ def resolve_references(input_path: str, output_path: str, refs_dir: str, inline_
 
 	if result == 0:
 		return
+	
+	raise {
+        11: InputFilepathErr,
+        12: InputStdinErr,
+        13: InputRefDirCwdErr,
+        21: OutputFilepathErr,
+        22: OutputFilepathErr,
+		23: OutputStdoutErr,
+        31: RootDocumentErr,
+        32: RefResolveErr,
+    }.get(result, UnexpectedErr)
 
 
 if __name__ == '__main__':
