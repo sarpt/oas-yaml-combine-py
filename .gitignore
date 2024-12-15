@@ -16,3 +16,6 @@ vendor/
 
 # pycache
 __pycache__/
+
+# build dirs
+dist/
