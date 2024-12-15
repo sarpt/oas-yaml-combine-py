@@ -1,8 +1,11 @@
 from ctypes import *
 import argparse
 from errors import * 
+import os
 
-lib = cdll.LoadLibrary("./vendor/liboasyamlcombine.so")
+dir_path = os.path.dirname(os.path.realpath(__file__))
+lib_path = os.path.join(dir_path, "vendor", "liboasyamlcombine.so")
+lib = cdll.LoadLibrary(lib_path)
 
 def resolve_references(input_path: str, output_path: str, refs_dir: str, inline_local: bool, inline_remote: bool, keep_local: bool):
 	result = lib.oasYamlCombine(
@@ -18,15 +21,15 @@ def resolve_references(input_path: str, output_path: str, refs_dir: str, inline_
 		return
 	
 	raise {
-        11: InputFilepathErr,
-        12: InputStdinErr,
-        13: InputRefDirCwdErr,
-        21: OutputFilepathErr,
-        22: OutputFilepathErr,
+		11: InputFilepathErr,
+		12: InputStdinErr,
+		13: InputRefDirCwdErr,
+		21: OutputFilepathErr,
+		22: OutputFilepathErr,
 		23: OutputStdoutErr,
-        31: RootDocumentErr,
-        32: RefResolveErr,
-    }.get(result, UnexpectedErr)
+		31: RootDocumentErr,
+		32: RefResolveErr,
+	}.get(result, UnexpectedErr)
 
 
 if __name__ == '__main__':

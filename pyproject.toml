@@ -18,7 +18,7 @@ artifacts = [
 
 [project]
 name = "oas-yaml-combine-py"
-version = "0.0.1"
+version = "0.0.2"
 authors = [
   { name="sarpt", email="sarpt.contact@gmail.com" },
 ]
